@@ -117,8 +117,9 @@ pub fn main() !void {
     print("\n", .{});
 
     // Header column rule line.
-    var n: u8 = 0;
-    while (n <= size) : (n += 1) {
+    // SS: rewriting this to a for loop did not really improve things...
+    for (0..size + 1) |n| {
+        _ = n; // SS: _ is a discard, this way the compiler does not complain about the unused capture n
         print("---+", .{});
     }
     print("\n", .{});
@@ -131,7 +132,7 @@ pub fn main() !void {
         for (0..size) |b| {
             // What formatting is needed here to make our columns
             // nice and straight?
-            print("{???} ", .{(a + 1) * (b + 1)});
+            print("{d:>3} ", .{(a + 1) * (b + 1)});
         }
 
         // After each row we use double line feed:
